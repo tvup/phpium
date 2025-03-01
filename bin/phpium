@@ -1,0 +1,42 @@
+#!/usr/bin/env php
+<?php
+
+$autoloadPaths = [
+    __DIR__ . '/../vendor/autoload.php',  // when binary in vendor/bin/
+    __DIR__ . '/../../../autoload.php',   // when binary in vendor/tvup/phpium/bin/
+];
+
+foreach ($autoloadPaths as $path) {
+    if (file_exists($path)) {
+        require $path;
+        break;
+    }
+}
+
+$composerJsonPath = \Composer\Factory::getComposerFile();
+$parentBasePath = dirname(realpath($composerJsonPath));
+$parentAutoloaderPath = $parentBasePath . '/vendor/autoload.php';
+require $parentAutoloaderPath;
+
+// Check if autoloader was found
+if (!class_exists(\Composer\Autoload\ClassLoader::class)) {
+    fwrite(STDERR, "❌ Couldn't find autoload.php of project!\n");
+    exit(1);
+}
+
+register_shutdown_function(function () use ($parentBasePath) {
+    $runningMarkerFilePath = $parentBasePath . '/.testsrunning';
+    if (file_exists($runningMarkerFilePath)) {
+        unlink($runningMarkerFilePath);
+    }
+});
+
+if (in_array('--generate-configuration', $_SERVER['argv'])) {
+    Phpium\Runner::generate();
+    exit(0);
+}
+
+exit(Phpium\Runner::run($_SERVER['argv']));
+
+
+

@@ -1,0 +1,33 @@
+{
+    "name": "tvup/phpium",
+    "description": "The PHPium Testing framework.",
+    "type": "library",
+    "keywords": [
+        "phpium",
+        "testing"
+    ],
+    "homepage": "https://torbenit.dk/",
+    "license": "BSD-3-Clause",
+    "version": "1.0.0",
+    "authors": [
+        {
+            "name": "Torben Evald Hansen",
+            "email": "teh@torbenit.dk",
+            "role": "enthuiast"
+        }
+    ],
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Phpium\\": "src/"
+        }
+    },
+    "bin": [
+        "bin/phpium"
+    ],
+    "require": {
+        "php": ">=7.4",
+        "composer/composer": "^2.8",
+        "ext-simplexml": "*"
+    }
+}
