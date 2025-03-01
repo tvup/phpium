@@ -27,7 +27,6 @@ class Runner
         if (file_exists($configPath)) {
             $xml = simplexml_load_file($configPath);
             foreach ($xml->setting as $setting) {
-                var_dump(1);
                 self::$config[(string)$setting['name']] = (string)$setting;
             }
         }
