@@ -37,7 +37,7 @@ class Runner
         $errorCount = 0;
         $errors = [];
 
-        echo 'PHPIUM 1.0 by Tvup' . PHP_EOL . PHP_EOL;
+        echo 'PHPIUM 1.0.2 by Tvup' . PHP_EOL . PHP_EOL;
 
         $runningMarkerFilePath = $parentBasePath . '/.testsrunning';
         file_put_contents($runningMarkerFilePath, '');
